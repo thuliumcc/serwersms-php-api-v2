@@ -1,23 +1,25 @@
 <?php
-
 namespace SerwerSMS;
 
-class MessagesTest extends \PHPUnit_Framework_TestCase {
-
+class MessagesTest extends \PHPUnit_Framework_TestCase
+{
     protected $serwersms;
     
-    protected function setUp(){
-        $this->serwersms = new SerwerSMS("demo","demo");
+    protected function setUp()
+    {
+        $this->serwersms = new SerwerSMS("demo", "demo");
     }
 
-    public function testSendSms() {
+    public function testSendSms()
+    {
         $r = $this->serwersms->messages->sendSms('500600700', 'Test message', 'INFORMACJA', array('test' => true, 'details' => true));
         $this->assertObjectHasAttribute('success', $r);
         $this->assertTrue($r->success);
         $this->assertObjectHasAttribute('items', $r);
     }
 
-    public function testSendPersonalized() {
+    public function testSendPersonalized()
+    {
         $messages[] = array(
             'phone' => '500600700',
             'text' => 'First message'
@@ -32,14 +34,16 @@ class MessagesTest extends \PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute('items', $r);
     }
 
-    public function testSendVoice() {
+    public function testSendVoice()
+    {
         $r = $this->serwersms->messages->sendVoice('500600700', array('text' => 'Test message', 'test' => true, 'details' => true));
         $this->assertObjectHasAttribute('success', $r);
         $this->assertTrue($r->success);
         $this->assertObjectHasAttribute('items', $r);
     }
 
-    public function testSendMms() {
+    public function testSendMms()
+    {
         $list = $this->serwersms->files->index('mms');
         $r = $this->serwersms->messages->sendMms('500600700', 'MMS Title', array('test' => true, 'file_id' => $list->items[0]->id, 'details' => true));
         $this->assertObjectHasAttribute('success', $r);
@@ -47,37 +51,43 @@ class MessagesTest extends \PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute('items', $r);
     }
 
-    public function testView() {
+    public function testView()
+    {
         $list = $this->serwersms->messages->reports();
         $r = $this->serwersms->messages->view($list->items[0]->id);
         $this->assertObjectHasAttribute('id', $r);
     }
 
-    public function testReports() {
+    public function testReports()
+    {
         $r = $this->serwersms->messages->reports();
         $this->assertObjectHasAttribute('items', $r);
     }
 
-    public function testDelete() {
+    public function testDelete()
+    {
         $list = $this->serwersms->messages->reports();
         $r = $this->serwersms->messages->delete($list->items[0]->id);
         $this->assertObjectHasAttribute('success', $r);
         $this->assertFalse($r->success);
     }
 
-    public function testRecived() {
+    public function testRecived()
+    {
         $r = $this->serwersms->messages->recived('nd');
         $this->assertObjectHasAttribute('items', $r);
     }
 
-    public function testSendNd() {
-        $r = $this->serwersms->messages->sendNd('500600700','TEST');
+    public function testSendNd()
+    {
+        $r = $this->serwersms->messages->sendNd('500600700', 'TEST');
         $this->assertObjectHasAttribute('success', $r);
         $this->assertFalse($r->success);
     }
 
-    public function testSendNdi() {
-        $r = $this->serwersms->messages->sendNdi('500600700','Test message','+48555666777');
+    public function testSendNdi()
+    {
+        $r = $this->serwersms->messages->sendNdi('500600700', 'Test message', '+48555666777');
         $this->assertObjectHasAttribute('success', $r);
         $this->assertFalse($r->success);
     }

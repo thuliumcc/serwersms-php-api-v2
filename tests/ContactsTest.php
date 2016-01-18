@@ -1,17 +1,17 @@
 <?php
-
 namespace SerwerSMS;
 
-class ContactTest extends \PHPUnit_Framework_TestCase {
-
+class ContactsTest extends \PHPUnit_Framework_TestCase
+{
     protected $serwersms;
     
-    protected function setUp(){
-        $this->serwersms = new SerwerSMS("demo","demo");
+    protected function setUp()
+    {
+        $this->serwersms = new SerwerSMS("demo", "demo");
     }
 
-    public function testAdd() {
-        
+    public function testAdd()
+    {
         $params = array(
             'email' => 'test@mail.com',
             'first_name' => 'John',
@@ -19,26 +19,26 @@ class ContactTest extends \PHPUnit_Framework_TestCase {
             'company' => 'Hello Word!'
         );
 
-        $r = $this->serwersms->contacts->add(123,'500600800',$params);
+        $r = $this->serwersms->contacts->add(123, '500600800', $params);
         $this->assertObjectHasAttribute('success', $r);
         $this->assertTrue($r->success);
     }
 
-    public function testIndex() {
-
+    public function testIndex()
+    {
         $r = $this->serwersms->contacts->index();
         $this->assertObjectHasAttribute('items', $r);
     }
 
-    public function testView(){
-        
+    public function testView()
+    {
         $list = $this->serwersms->contacts->index();
         $r = $this->serwersms->contacts->view($list->items[0]->id);
         $this->assertObjectHasAttribute('id', $r);
     }
     
-    public function testEdit() {
-
+    public function testEdit()
+    {
         $list = $this->serwersms->contacts->index();
 
         $params = array(
@@ -48,21 +48,21 @@ class ContactTest extends \PHPUnit_Framework_TestCase {
             'company' => 'Hello Word!'
         );
 
-        $r = $this->serwersms->contacts->edit($list->items[0]->id,123,'500600700',$params);
+        $r = $this->serwersms->contacts->edit($list->items[0]->id, 123, '500600700', $params);
         $this->assertObjectHasAttribute('success', $r);
         $this->assertTrue($r->success);
     }
 
-    public function testDelete() {
-        
+    public function testDelete()
+    {
         $list = $this->serwersms->contacts->index();
         $r = $this->serwersms->contacts->delete($list->items[0]->id);
         $this->assertObjectHasAttribute('success', $r);
         $this->assertTrue($r->success);
     }
     
-    public function testImport(){
-        
+    public function testImport()
+    {
         $contact[] = array(
             'phone' => '500600700',
             'email' => 'test@mail.com',

@@ -1,16 +1,17 @@
 <?php
-
 namespace SerwerSMS;
 
-class StatsTest extends \PHPUnit_Framework_TestCase {
-
+class StatsTest extends \PHPUnit_Framework_TestCase
+{
     protected $serwersms;
     
-    protected function setUp() {
-        $this->serwersms = new SerwerSMS("demo","demo");
+    protected function setUp()
+    {
+        $this->serwersms = new SerwerSMS("demo", "demo");
     }
 
-    public function testIndex() {
+    public function testIndex()
+    {
         $r = $this->serwersms->stats->index();
         $this->assertObjectHasAttribute('items', $r);
     }

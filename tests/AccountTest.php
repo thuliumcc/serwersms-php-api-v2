@@ -1,17 +1,17 @@
 <?php
-
 namespace SerwerSMS;
 
-class AccountTest extends \PHPUnit_Framework_TestCase {
-
+class AccountTest extends \PHPUnit_Framework_TestCase
+{
     protected $serwersms;
     
-    protected function setUp(){
-        $this->serwersms = new SerwerSMS("demo","demo");
+    protected function setUp()
+    {
+        $this->serwersms = new SerwerSMS("demo", "demo");
     }
     
-    public function testAdd(){
-        
+    public function testAdd()
+    {
         $params = array(
             'phone' => '+48500600700',
             'email' => 'mail@test.com',
@@ -20,30 +20,29 @@ class AccountTest extends \PHPUnit_Framework_TestCase {
             'company' => 'Hello World'
         );
         
-        try{
+        try {
             $r = $this->serwersms->account->add($params);
             $this->assertObjectHasAttribute('error', $r);
             $this->assertEquals(4312, $r->error->code);
-        } catch(Exception $e){
-            
+        } catch (Exception $e) {
         }
     }
 
-    public function testLimits() {
-        
+    public function testLimits()
+    {
         $r = $this->serwersms->account->limits();
         $this->assertObjectHasAttribute('items', $r);
         $this->assertEquals('eco', $r->items[0]->type);
     }
 
-    public function testHelp() {
-
+    public function testHelp()
+    {
         $r = $this->serwersms->account->help();
         $this->assertObjectHasAttribute('telephone', $r);
     }
 
-    public function testMessages() {
-        
+    public function testMessages()
+    {
         $r = $this->serwersms->account->messages();
         $this->assertObjectHasAttribute('items', $r);
     }
