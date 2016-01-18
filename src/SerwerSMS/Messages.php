@@ -1,10 +1,10 @@
 <?php
-
 namespace SerwerSMS;
 
-class Messages {
-
-    public function __construct($master) {
+class Messages
+{
+    public function __construct($master)
+    {
         $this->master = $master;
     }
 
@@ -40,7 +40,8 @@ class Messages {
      *          @option string "error_message"
      *          @option string "text"
      */
-    public function sendSms($phone, $text, $sender = null, $params = array()) {
+    public function sendSms($phone, $text, $sender = null, $params = array())
+    {
         $params = array_merge(array(
             'phone' => $phone,
             'text' => $text,
@@ -81,7 +82,8 @@ class Messages {
      *          @option string "error_message"
      *          @option string "text"
      */
-    public function sendPersonalized($messages, $sender = null, $params = array()) {
+    public function sendPersonalized($messages, $sender = null, $params = array())
+    {
         $params = array_merge(array(
             'messages' => $messages,
             'sender' => $sender
@@ -114,7 +116,8 @@ class Messages {
      *          @option string "error_message"
      *          @option string "text"
      */
-    public function sendVoice($phone, $params = array()) {
+    public function sendVoice($phone, $params = array())
+    {
         $params = array_merge(array(
             'phone' => $phone
                 ), $params);
@@ -146,7 +149,8 @@ class Messages {
      *          @option string "error_message"
      *          @option string "text"
      */
-    public function sendMms($phone, $title, $params = array()) {
+    public function sendMms($phone, $title, $params = array())
+    {
         $params = array_merge(array(
             'phone' => $phone,
             'title' => $title
@@ -203,7 +207,8 @@ class Messages {
      *          @option string "address"
      *          @option string "description"
      */
-    public function view($id, $params = array()) {
+    public function view($id, $params = array())
+    {
         $params = array_merge(array('id' => $id), $params);
         return $this->master->call('messages/view', $params);
     }
@@ -281,7 +286,8 @@ class Messages {
      *              @option string "address"
      *              @option string "description"
      */
-    public function reports($params = array()) {
+    public function reports($params = array())
+    {
         return $this->master->call('messages/reports', $params);
     }
 
@@ -293,7 +299,8 @@ class Messages {
      * @return array
      *      @option bool "success"
      */
-    public function delete($id, $unique_id = null) {
+    public function delete($id, $unique_id = null)
+    {
         $params = array('id' => $id, 'unique_id' => $unique_id);
         return $this->master->call('messages/delete', $params);
     }
@@ -345,7 +352,8 @@ class Messages {
      *              @option string "address"
      *              @option string "description"
      */
-    public function recived($type, $params = array()) {
+    public function recived($type, $params = array())
+    {
         $params = array_merge(array('type' => $type), $params);
         return $this->master->call('messages/recived', $params);
     }
@@ -358,7 +366,8 @@ class Messages {
      * @return array
      *      @option bool "success"
      */
-    public function sendNd($phone, $text) {
+    public function sendNd($phone, $text)
+    {
         $params = array(
             'phone' => $phone,
             'text' => $text
@@ -375,7 +384,8 @@ class Messages {
      * @return array
      *      @option bool "success"
      */
-    public function sendNdi($phone, $text, $ndi_number) {
+    public function sendNdi($phone, $text, $ndi_number)
+    {
         $params = array(
             'phone' => $phone,
             'text' => $text,
@@ -383,5 +393,4 @@ class Messages {
         );
         return $this->master->call('messages/send_ndi', $params);
     }
-
 }
